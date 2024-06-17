@@ -17,8 +17,6 @@
 
 <img src="./images/demo_1.png" alt="demo_1" style="zoom:50%;" />
 
-<img src="images/demo.png" alt="demo" style="max-width: 500px;" />
-
 这个 Echo 只为简单展示，而你可以基于该框架，实现更多的功能逻辑，甚至像我一样接入大模型，图片横向翻转表示图片处理能力：
 
 <img src="./images/demo_2.png" alt="demo_2" style="zoom:33%;" />
