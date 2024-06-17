@@ -1,9 +1,9 @@
-# 公众号消息回复服务
+# 企业微信-应用消息回复服务
 
 ## 1. 项目介绍
 
 本项目是一个基于 [Flask](https://flask.palletsprojects.com/en/1.1.x/) 的
-**微信公众号/订阅号的自动回复消息的简单服务框架**。
+**企业微信【应用】的自动回复消息的简单服务框架**。
 使用者只需要实现两个简单的函数，即可快速搭建一个企业微信应用接收/回复消息的接口服务。
 
 实现过程参考 [微信公众平台开发者文档-基础消息能力/接收普通消息](https://developer.work.weixin.qq.com/document/path/96466)
@@ -53,10 +53,10 @@
 
 ### 3.3 测试服务
 
-通过上面的配置，我们已经实现了可以个性化自动回复消息的公众号服务，能够实现【demo 效果】中展示的功能。
+通过上面的配置，我们已经实现了可以个性化自动回复消息的企业微信-应用的回调服务，能够实现【demo 效果】中展示的功能。
 
 - **Echo功能
-  **：在公众号中发送一条消息，如果服务正常，会收到一条回复的 Echo 消息。文本、图片、语音消息。 目前 demo.py 中支持的 Echo 消息格式只有文本、图片、语音消息，其他消息格式可以自行实现处理逻辑
+  **：在【应用】中发送一条消息，如果服务正常，会收到一条回复的 Echo 消息。文本、图片、语音消息。 目前 demo.py 中支持的 Echo 消息格式只有文本、图片、语音消息，其他消息格式可以自行实现处理逻辑
 
 ### 3.4 正式环境使用的注意事项
 
@@ -68,7 +68,7 @@
 
 ## 4. 支持消息说明
 
-当前已经封装了微信公众号官网支持的[6种消息类型](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html)，具体的结构详见[req_msg.py](src%2Fwx_mp_svr%2Freq_msg.py)：
+当前已经封装了企业微信-应用-官网支持的[6种消息类型](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Receiving_standard_messages.html)，具体的结构详见[req_msg.py](src%2Fwx_mp_svr%2Freq_msg.py)：
 
 - 文本消息
 - 图片消息
@@ -77,7 +77,7 @@
 - 地理位置消息
 - 链接消息
 
-可以立即回复的消息类型，也与微信公众号官网支持的[6种消息类型](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Passive_user_reply_message.html)一致，具体结构见[passive_rsp_msg.py](src%2Fwx_mp_svr%2Fpassive_rsp_msg.py):
+可以立即回复的消息类型，也与官网支持的[6种消息类型](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Passive_user_reply_message.html)一致，具体结构见[passive_rsp_msg.py](src%2Fwx_mp_svr%2Fpassive_rsp_msg.py):
 
 - 文本消息
 - 图片消息
