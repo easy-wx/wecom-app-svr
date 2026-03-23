@@ -73,3 +73,13 @@ class RspVideoMsg(RspMsg):
         self.insert_elem('Video/MediaId', self.media_id)
         self.insert_elem('Video/Title', self.title)
         self.insert_elem('Video/Description', self.description)
+
+
+class RspFileMsg(RspMsg):
+    def __init__(self, from_user_name=None, to_user_name=None, media_id=None):
+        super().__init__('file', from_user_name, to_user_name)
+        self.media_id = media_id
+
+    def update_xml(self):
+        super().update_xml()
+        self.insert_elem('File/MediaId', self.media_id)

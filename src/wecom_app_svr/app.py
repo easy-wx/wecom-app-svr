@@ -1,12 +1,31 @@
 # 参考文档：https://developer.work.weixin.qq.com/document/path/96466
 import logging
 import os
+import socket
 from flask import Flask, request
+from werkzeug.serving import ThreadedWSGIServer, make_server
 from .req_msg import ReqMsg
 from .passive_rsp_msg import RspTextMsg
 
 from wx_crypt import WXBizMsgCrypt, WxChannel_Wecom
 import xml.etree.cElementTree as ET
+
+
+class ReusePortServer(ThreadedWSGIServer):
+    """在绑定前设置 SO_REUSEPORT"""
+
+    def server_bind(self):
+        # 关键：在父类 bind 之前设置选项
+        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+        if hasattr(socket, 'SO_REUSEPORT'):
+            try:
+                self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+            except (OSError, PermissionError):
+                pass
+
+        # 现在才调用父类的 bind
+        super().server_bind()
 
 
 def _encode_rsp(wx_cpt, rsp_str):
@@ -60,7 +79,10 @@ class WecomAppServer(object):
             raise Exception("event handler is not set")
         self._app.get(self.path)(self.handle_app_call_get)
         self._app.post(self.path)(self.handle_app_call_post)
-        self._app.run(host=self.host, port=self.port)
+
+        # 使用自定义 Server 类支持端口重用
+        server = ReusePortServer(self.host, self.port, self._app)
+        server.serve_forever()
 
     def get_crypto_obj(self):
         return WXBizMsgCrypt(self._token, self._aes_key, self._corp_id, channel=WxChannel_Wecom)

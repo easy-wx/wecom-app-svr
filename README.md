@@ -76,6 +76,7 @@
 - 视频消息
 - 地理位置消息
 - 链接消息
+- **文件消息** (新增)
 
 可以立即回复的消息类型，也与官网支持的[6种消息类型](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Passive_user_reply_message.html)一致，具体结构见[passive_rsp_msg.py](src%2Fwx_mp_svr%2Fpassive_rsp_msg.py):
 
@@ -83,6 +84,7 @@
 - 图片消息
 - 语音消息
 - 视频消息
+- **文件消息** (新增)
 - 音乐消息
 - 图文消息
 

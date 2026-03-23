@@ -1,7 +1,7 @@
 import logging
 import sys
 
-from wecom_app_svr import WecomAppServer, RspTextMsg, RspImageMsg, RspVideoMsg
+from wecom_app_svr import WecomAppServer, RspTextMsg, RspImageMsg, RspVideoMsg, RspFileMsg
 
 
 def msg_handler(req_msg):
@@ -14,6 +14,9 @@ def msg_handler(req_msg):
         return ret
     if req_msg.msg_type == 'video':
         ret = RspVideoMsg(req_msg.to_user, req_msg.from_user, req_msg.media_id, "视频标题", "视频描述")
+        return ret
+    if req_msg.msg_type == 'file':
+        ret = RspFileMsg(req_msg.to_user, req_msg.from_user, req_msg.media_id)
         return ret
 
     # 返回消息类型
